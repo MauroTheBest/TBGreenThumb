@@ -1,0 +1,5 @@
+SoilMeter : A0
+LCD : SCL = A5 - SDA A4
+Light Sensor: 5v - A2 + resistor 10k
+DHT Sensor: D3
+Touch Button : D7
