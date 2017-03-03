@@ -7,11 +7,7 @@ int pinLight = A3;
 int pinButton = 7;
 int LCDStatus = HIGH;
 int lastButtonState = HIGH; 
-int buttonState;
 SimpleDHT11 dht11;
-
-unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
-unsigned long debounceDelay = 50;    // the debounce time; increase if the output flickers
 
 U8GLIB_SSD1306_128X64 u8g(U8G_I2C_OPT_NONE|U8G_I2C_OPT_DEV_0);
 
@@ -19,8 +15,7 @@ long previousMillis = 0;
 long interval = 5000;    
 
 void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(9600);
+  //Serial.begin(9600);
   pinMode( pinLight, INPUT);
   pinMode( pinButton, INPUT);
 }
@@ -36,12 +31,12 @@ void loop() {
   }
   
   
-  Serial.print("LCD: ");
-  Serial.println(LCDStatus);
+   //Serial.print("LCD: ");
+   //Serial.println(LCDStatus);
   
-   Serial.print("Button: ");
-   Serial.println(lastButtonState);
-   Serial.println("");
+   //Serial.print("Button: ");
+   //Serial.println(lastButtonState);
+   //Serial.println("");
 
 
     if (lastButtonState == HIGH &&digitalRead(pinButton) == LOW) {
@@ -49,11 +44,9 @@ void loop() {
       if (LCDStatus == HIGH){
         u8g.sleepOff();
         LCDStatus = LOW;
-        //delay(2000);
       }else{
         u8g.sleepOn();
-        LCDStatus = HIGH;
-        
+        LCDStatus = HIGH;        
       }
     }
 
@@ -65,8 +58,7 @@ void loop() {
     byte data[40] = {0};
     String soil = "";
     String light = "";
-    
-  
+      
     int sensorValue = analogRead(mostureSensor);
     //Serial.println(sensorValue);
   
@@ -114,9 +106,6 @@ void loop() {
   
     } while( u8g.nextPage() );
 
-
     previousMillis = currentMillis;  
-  } 
-  
- // delay(1000);  
+  }   
 }
